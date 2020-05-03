@@ -4,11 +4,10 @@ import requests
 from flask import Flask, send_file, Response
 from bs4 import BeautifulSoup
 
-import pysnooper
 
 app = Flask(__name__)
 
-@pysnooper.snoop()
+
 def get_fact():
 
     response = requests.get("http://unkno.com")
@@ -18,7 +17,7 @@ def get_fact():
 
     return facts[0].getText()
 
-@pysnooper.snoop()
+
 def get_url(fact):
     payload = {'input_text': fact}
     response = requests.post('https://hidden-journey-62459.herokuapp.com/piglatinize/',
@@ -28,7 +27,7 @@ def get_url(fact):
 
     return url
 
-@pysnooper.snoop()
+
 @app.route('/')
 def home():
     fact = get_fact().strip()
