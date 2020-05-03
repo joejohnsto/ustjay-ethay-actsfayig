@@ -31,9 +31,17 @@ def get_url(fact):
 @app.route('/')
 def home():
     fact = get_fact().strip()
-    body = get_url(fact)
+    url = get_url(fact)
+    html_link = f'<a href="{url}">{url}</a>'
+    body = ['<pre>',
+            'Your quote is:',
+            fact,
+            'Follow the link below to see your quote in pig latin',
+            html_link,
+            '</pre>']
 
-    return body#Response(response=body, mimetype="text/plain")
+    # return Response(response=body, mimetype="text/plain")
+    return Response(response='\n'.join(body), mimetype="text/html")
 
 
 if __name__ == "__main__":
